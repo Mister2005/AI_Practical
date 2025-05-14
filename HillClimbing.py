@@ -10,28 +10,13 @@ def input_tree():
 
 def assign_values(tree):
     values = {}
-    
     all_nodes = set(tree.keys())
     for children in tree.values():
         all_nodes.update(children)
-    
     all_nodes = sorted(list(all_nodes))
-    total_nodes = len(all_nodes)
-    
-    print(f"\nAssigning values to {total_nodes} nodes")
-    print("Higher values are preferred in hill climbing.")
-    
-    for i, node in enumerate(all_nodes):
-        while True:
-            try:
-                val_input = input(f"[{i+1}/{total_nodes}] Enter value for node '{node}': ")
-                val = int(val_input)
-                values[node] = val
-                break
-            except ValueError:
-                print("Please enter a valid integer value.")
-    
-    print("All node values assigned successfully.")
+    for node in all_nodes:
+        val = int(input(f"Enter value for node '{node}': "))
+        values[node] = val
     return values
 
 def simple_hill_climbing(tree, values, start):
@@ -50,7 +35,7 @@ def simple_hill_climbing(tree, values, start):
             break
 
     print("\nSimple Hill Climbing Path:", " -> ".join(path))
-    print("Reached Node:", current, "| Value:", values[current])
+    print("Reached Node:", current, "\nValue:", values[current])
 
 if __name__ == "__main__":
     tree = input_tree()

@@ -1,17 +1,15 @@
-from collections import deque
-
-def bfs(tree, start):
+def dfs(tree, start):
     visited = set()
-    queue = deque([start])
-    visited.add(start)
     order = []
-    while queue:
-        node = queue.popleft()
+
+    def _dfs(node):
+        visited.add(node)
         order.append(node)
         for neighbor in tree.get(node, []):
             if neighbor not in visited:
-                visited.add(neighbor)
-                queue.append(neighbor)
+                _dfs(neighbor)
+
+    _dfs(start)
     return order
 
 def main():
@@ -26,11 +24,10 @@ def main():
     
     start = input("Enter start node: ")
     
-    result = bfs(tree, start)
+    result = dfs(tree, start)
     
-    print("\nBFS Traversal Result:")
+    print("\nDFS Traversal Result:")
     print("Traversal Order:", " -> ".join(result))
-    print("Total Nodes Visited:", len(result))
 
 if __name__ == "__main__":
     main()
