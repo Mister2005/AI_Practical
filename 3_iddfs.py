@@ -1,5 +1,4 @@
 import sys
-sys.setrecursionlimit(10000)
 
 def dls(tree, node, goal, depth, path, visited):
     if depth == 0 and node == goal:
@@ -22,23 +21,22 @@ def iddfs(tree, start, goal, max_depth):
     return None
 
 def main():
-    print("Iterative Deepening DFS on a tree")
     n = int(input("Number of nodes: "))
-    print("Enter each node and its children (space-separated):")
+    print("Enter each node and its children (space-separated): ")
     tree = {}
     for _ in range(n):
         parts = input().split()
-        node, children = parts[0], parts[1:]
-        tree[node] = children
-
+        if parts:
+            node, children = parts[0], parts[1:]
+            tree[node] = children
     start = input("Start node: ")
-    goal  = input("Goal node: ")
+    goal = input("Goal node: ")
     maxd = int(input("Maximum depth to search: "))
     path = iddfs(tree, start, goal, maxd)
     if path:
         print("Path found at depth ≤", maxd, ":", " → ".join(path))
     else:
-        print("No path found within depth", maxd)
+        print("No path found from", start, "to", goal, "within depth", maxd)
 
 if __name__ == "__main__":
     main()

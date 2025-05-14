@@ -1,5 +1,4 @@
 import sys
-sys.setrecursionlimit(10000)
 
 def dfs(tree, node, goal, visited, path):
     visited.add(node)
@@ -14,23 +13,22 @@ def dfs(tree, node, goal, visited, path):
     return False
 
 def main():
-    print("Depth-First Search on a tree")
     n = int(input("Number of nodes: "))
-    print("Enter each node and its children (space-separated):")
+    print("Enter each node and its children (space-separated), e.g.  A B C  means A has children B and C")
     tree = {}
     for _ in range(n):
         parts = input().split()
-        node, children = parts[0], parts[1:]
-        tree[node] = children
-
+        if parts:
+            node, children = parts[0], parts[1:]
+            tree[node] = children
     start = input("Start node: ")
-    goal  = input("Goal node: ")
+    goal = input("Goal node: ")
     visited = set()
     path = []
     if dfs(tree, start, goal, visited, path):
         print("Path found:", " → ".join(path))
     else:
-        print("No path found.")
+        print("No path found from", start, "to", goal)
 
 if __name__ == "__main__":
     main()
