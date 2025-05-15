@@ -2,14 +2,14 @@ def dfs(tree, start):
     visited = set()
     order = []
 
-    def _dfs(node):
+    def dfs(node):
         visited.add(node)
         order.append(node)
         for neighbor in tree.get(node, []):
             if neighbor not in visited:
-                _dfs(neighbor)
+                dfs(neighbor)
 
-    _dfs(start)
+    dfs(start)
     return order
 
 def main():
